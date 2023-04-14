@@ -18,9 +18,19 @@ export const deleteInterpreter = async (itemId) => {
   }
 };
 
+export const updateInterpreter = async (item) => {
+  try {
+    const { data } = await axios.put('https://74f3u7fi44.execute-api.us-east-1.amazonaws.com/ModInterprete',item);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 const mutations = {
   addInterpreter,
   deleteInterpreter,
+  updateInterpreter,
 };
 
 export default mutations;
