@@ -20,8 +20,7 @@ import Loader from './CustomLoader';
 export default function DialogToUpdateInterpreter({
   handleClose,
   handleRefetch,
-  item: interpreter,
-  open,
+  item,
 }) {
   const {
     data: profiles,
@@ -29,7 +28,7 @@ export default function DialogToUpdateInterpreter({
     isError,
     isLoading,
     remove,
-  } = useQuery('interpreter-profiles', () => getInterpreterProfiles(interpreter[0]));
+  } = useQuery('interpreter-profiles', () => getInterpreterProfiles(item[0]));
 
   const {
     formState: { errors },
@@ -40,9 +39,9 @@ export default function DialogToUpdateInterpreter({
   } = useForm({
     mode: 'onSubmit',
     defaultValues: {
-      debut: interpreter[2],
-      birthday: interpreter[3],
-      name: interpreter[1],
+      debut: item[2],
+      birthday: item[3],
+      name: item[1],
     },
   });
 
@@ -55,16 +54,14 @@ export default function DialogToUpdateInterpreter({
     },
   });
 
-  const onSubmit = async (editedInterpreter) => {
-    const {
-      birthday,
-      debut,
-      name,
-      ...data
-    } = editedInterpreter;
-
+  const onSubmit = async ({
+    birthday,
+    debut,
+    name,
+    ...data
+  }) => {
     mutate({
-      Id_Interprete: interpreter[0],
+      Id_Interprete: item[0],
       fechadebut: debut,
       fechanacimiento: birthday,
       nombre: name,
@@ -80,7 +77,7 @@ export default function DialogToUpdateInterpreter({
 
 return (
   <Dialog className="form" onClose={handleClose} open>
-    <DialogTitle className="form-title">Agregar nuevo intérprete</DialogTitle>
+    <DialogTitle className="form-title">Editar intérprete</DialogTitle>
     <DialogContent className="form-content">
     {isLoading
       ? <Loader />
