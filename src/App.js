@@ -1,10 +1,28 @@
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import './App.css';
+import Home from './containers/Home';
+
+// Create a client
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="app">
-      <h1>Bienvenid@ a MAPDCFS App</h1>
-    </div>
+    // Provide the client to App
+    <QueryClientProvider client={queryClient}>
+      <div className="app">
+        <div className="wrapper">
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<Home />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </div>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 
