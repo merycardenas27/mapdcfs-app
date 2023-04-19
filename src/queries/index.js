@@ -22,9 +22,19 @@ export const getInterpreterProfiles = async (interpreterId) => {
   }
 };
 
+export const getPhonograms = async () => {
+  try {
+    const { data } = await axios.get('https://w8n8xg6w16.execute-api.us-east-1.amazonaws.com/LisFonograma');
+    return JSON.parse(data);
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 const queries = {
   getInterpreterProfiles,
   getInterpreters,
+  getPhonograms,
 };
 
 export default queries;
