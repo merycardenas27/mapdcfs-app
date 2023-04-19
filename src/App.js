@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './containers/Home';
 import Interpreters from './containers/Interpreters';
+import Phonograms from './containers/Phonograms';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -18,6 +19,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path='/' element={<Home />} />
+              <Route path='fonogramas/' element={<Phonograms />} />
               <Route path='interpretes/' element={<Interpreters />} />
             </Routes>
           </BrowserRouter>
