@@ -3,6 +3,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import './App.css';
+import Collections from './containers/Collections';
 import Home from './containers/Home';
 import Interpreters from './containers/Interpreters';
 import MusicalWorks from './containers/MusicalWorks';
@@ -23,6 +24,7 @@ function App() {
               <Route path='fonogramas/' element={<Phonograms />} />
               <Route path='interpretes/' element={<Interpreters />} />
               <Route path='obras-musicales/' element={<MusicalWorks />} />
+              <Route path='recaudaciones/' element={<Collections />} />
             </Routes>
           </BrowserRouter>
         </div>
