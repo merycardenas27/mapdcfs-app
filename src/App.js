@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './containers/Home';
 import Interpreters from './containers/Interpreters';
+import MusicalWorks from './containers/MusicalWorks';
 import Phonograms from './containers/Phonograms';
 
 // Create a client
@@ -21,6 +22,7 @@ function App() {
               <Route path='/' element={<Home />} />
               <Route path='fonogramas/' element={<Phonograms />} />
               <Route path='interpretes/' element={<Interpreters />} />
+              <Route path='obras-musicales/' element={<MusicalWorks />} />
             </Routes>
           </BrowserRouter>
         </div>
