@@ -1,10 +1,5 @@
-.app {
+.view .head {
   text-align: center;
-}
-
-.wrapper {
-  margin: 0 auto;
-  width: 70%;
 }
 
 .actions {
@@ -12,13 +7,45 @@
   text-align: right;
 }
 
+.form-content {
+  padding-top: 20px !important;
+}
+
+.form-title {
+  text-align: center;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .wrapper {
-    width: 90%;
+    padding: 1rem;
+  }
+
+  .view .head {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+
+  #home a {
+    width: 100%;
+  }
+
+  #home button {
+    width: 100%;
   }
 }
 
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .wrapper {
+    margin: 0 auto;
+    width: 70%;
+  }
+
+  .view .head {
+    margin-top: 2rem;
+  }
+}
 /* .app-logo {
   height: 40vmin;
   pointer-events: none;
