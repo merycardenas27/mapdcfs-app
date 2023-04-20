@@ -31,9 +31,19 @@ export const getPhonograms = async () => {
   }
 };
 
+export const getMusicalWorks = async () => {
+  try {
+    const { data } = await axios.get('https://3yjjc1xfq5.execute-api.us-east-1.amazonaws.com/LisObraMusical');
+    return JSON.parse(data);
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 const queries = {
   getInterpreterProfiles,
   getInterpreters,
+  getMusicalWorks,
   getPhonograms,
 };
 
