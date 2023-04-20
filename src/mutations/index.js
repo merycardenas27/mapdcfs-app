@@ -36,6 +36,15 @@ export const deleteMusicalWork = async (itemId) => {
   }
 };
 
+export const deletePhonogram = async (itemId) => {
+  try {
+    const { data } = await axios.delete('https://kspuvscxr8.execute-api.us-east-1.amazonaws.com/EliFonograma',{ data: { Id: itemId } });
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const updateInterpreter = async (item) => {
   try {
     const { data } = await axios.put('https://74f3u7fi44.execute-api.us-east-1.amazonaws.com/ModInterprete',item);
@@ -50,6 +59,7 @@ const mutations = {
   deleteCollection,
   deleteInterpreter,
   deleteMusicalWork,
+  deletePhonogram,
   updateInterpreter,
 };
 
