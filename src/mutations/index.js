@@ -9,6 +9,15 @@ export const addInterpreter = async (item) => {
   }
 };
 
+export const deleteCollection = async (itemId) => {
+  try {
+    const { data } = await axios.delete('https://x5fe6ojs4a.execute-api.us-east-1.amazonaws.com/EliRecaudacion',{ data: { Id: itemId } });
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const deleteInterpreter = async (itemId) => {
   try {
     const { data } = await axios.delete('https://t3gz0tuvjg.execute-api.us-east-1.amazonaws.com/EliInterprete',{ data: { Id: itemId } });
@@ -29,6 +38,7 @@ export const updateInterpreter = async (item) => {
 
 const mutations = {
   addInterpreter,
+  deleteCollection,
   deleteInterpreter,
   updateInterpreter,
 };
