@@ -18,6 +18,15 @@ export const addMusicalWork = async (item) => {
   }
 };
 
+export const addPhonogram = async (item) => {
+  try {
+    const { data } = await axios.post('https://0ya2payk03.execute-api.us-east-1.amazonaws.com/RegFonograma', item);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const deleteCollection = async (itemId) => {
   try {
     const { data } = await axios.delete('https://x5fe6ojs4a.execute-api.us-east-1.amazonaws.com/EliRecaudacion',{ data: { Id: itemId } });
@@ -66,6 +75,7 @@ export const updateInterpreter = async (item) => {
 const mutations = {
   addInterpreter,
   addMusicalWork,
+  addPhonogram,
   deleteCollection,
   deleteInterpreter,
   deleteMusicalWork,
