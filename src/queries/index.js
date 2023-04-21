@@ -10,6 +10,15 @@ export const getCollections = async () => {
   }
 };
 
+export const getGenres = async () => {
+  try {
+    const { data } = await axios.get('https://9a3v0bkhd8.execute-api.us-east-1.amazonaws.com/LisGenero');
+    return JSON.parse(data);
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const getInterpreters = async () => {
   try {
     const { data } = await axios.get('https://h1h6ip1eb9.execute-api.us-east-1.amazonaws.com/LisInterprete');
@@ -51,6 +60,7 @@ export const getMusicalWorks = async () => {
 
 const queries = {
   getCollections,
+  getGenres,
   getInterpreterProfiles,
   getInterpreters,
   getMusicalWorks,
