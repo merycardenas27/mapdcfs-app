@@ -1,5 +1,14 @@
 import axios from 'axios';
 
+export const addCollection = async (item) => {
+  try {
+    const { data } = await axios.post('https://5r95ja9dzc.execute-api.us-east-1.amazonaws.com/RegRecaudacion', item);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const addInterpreter = async (item) => {
   try {
     const { data } = await axios.post('https://du3z35eqob.execute-api.us-east-1.amazonaws.com/RegInterprete', item);
@@ -73,6 +82,7 @@ export const updateInterpreter = async (item) => {
 };
 
 const mutations = {
+  addCollection,
   addInterpreter,
   addMusicalWork,
   addPhonogram,
