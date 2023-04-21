@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import { getMusicalWorks } from '../queries';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+
 import { deleteMusicalWork } from '../mutations';
+import { getMusicalWorks } from '../queries';
 
 import AlertError from '../components/CustomAlertError';
 import AlertInfo from '../components/CustomAlertInfo';
+import DialogToAdd from '../components/DialogToAddMusicalWork';
 import DialogToDelete from '../components/DialogToDelete';
 import Loader from '../components/CustomLoader';
 import Table from '../components/CustomTable';
 
 const MusicalWorks = () => {
   const [itemToDelete, setItemToDelete] = useState(null);
+  const [openAddDialog, setOpenAddDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const {
@@ -23,6 +29,14 @@ const MusicalWorks = () => {
     isLoading,
     refetch,
   } =useQuery('musicalWorks', getMusicalWorks);
+
+  const handleOpenAddDialog = () => {
+    setOpenAddDialog(true);
+  };
+
+  const handleCloseAddDialog = () => {
+    setOpenAddDialog(false);
+  };
 
   const handleOpenDeleteDialog = (itemId) => {
     setItemToDelete(itemId);
@@ -51,6 +65,13 @@ const MusicalWorks = () => {
         : isError
           ? <AlertError message={error.message} />
           : <>
+              <section className="actions">
+                <Tooltip title="Agregar">
+                  <IconButton aria-label="agregar" color="primary" onClick={handleOpenAddDialog}>
+                    <PersonAddIcon />
+                  </IconButton>
+                </Tooltip>
+              </section>
               <section className="body">
                 {!items.length
                   ? <AlertInfo message="No hay obras musicales registradas" />
@@ -62,6 +83,11 @@ const MusicalWorks = () => {
                 }
               </section>
               <section className="dialogs">
+                <DialogToAdd
+                  handleClose={handleCloseAddDialog}
+                  handleRefetch={refetch}
+                  open={openAddDialog}
+                />
                 <DialogToDelete
                   handleClose={handleCloseDeleteDialog}
                   handleDelete={mutateByDeleting}
