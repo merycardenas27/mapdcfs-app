@@ -9,6 +9,15 @@ export const addInterpreter = async (item) => {
   }
 };
 
+export const addMusicalWork = async (item) => {
+  try {
+    const { data } = await axios.post('https://ndlzrykwwh.execute-api.us-east-1.amazonaws.com/RegObraMusical', item);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const deleteCollection = async (itemId) => {
   try {
     const { data } = await axios.delete('https://x5fe6ojs4a.execute-api.us-east-1.amazonaws.com/EliRecaudacion',{ data: { Id: itemId } });
@@ -56,6 +65,7 @@ export const updateInterpreter = async (item) => {
 
 const mutations = {
   addInterpreter,
+  addMusicalWork,
   deleteCollection,
   deleteInterpreter,
   deleteMusicalWork,
