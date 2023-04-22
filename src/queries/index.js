@@ -49,6 +49,16 @@ export const getPhonograms = async () => {
   }
 };
 
+
+export const getPlatforms = async () => {
+  try {
+    const { data } = await axios.get('https://y39cf05zji.execute-api.us-east-1.amazonaws.com/LisPlataformaStreaming');
+    return JSON.parse(data);
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const getMusicalWorks = async () => {
   try {
     const { data } = await axios.get('https://3yjjc1xfq5.execute-api.us-east-1.amazonaws.com/LisObraMusical');
@@ -65,6 +75,7 @@ const queries = {
   getInterpreters,
   getMusicalWorks,
   getPhonograms,
+  getPlatforms,
 };
 
 export default queries;
