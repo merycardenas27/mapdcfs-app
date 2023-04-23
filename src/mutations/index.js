@@ -45,6 +45,15 @@ export const addPhonogram = async (item) => {
   }
 };
 
+export const deleteAccount = async (itemId) => {
+  try {
+    const { data } = await axios.delete('https://n11yrrb30d.execute-api.us-east-1.amazonaws.com/EliCuenta',{ data: { Id: itemId } });
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const deleteCollection = async (itemId) => {
   try {
     const { data } = await axios.delete('https://x5fe6ojs4a.execute-api.us-east-1.amazonaws.com/EliRecaudacion',{ data: { Id: itemId } });
@@ -96,6 +105,7 @@ const mutations = {
   addInterpreter,
   addMusicalWork,
   addPhonogram,
+  deleteAccount,
   deleteCollection,
   deleteInterpreter,
   deleteMusicalWork,
