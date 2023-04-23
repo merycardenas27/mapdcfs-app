@@ -1,6 +1,16 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios';
 
+export const getAccount = async (itemId) => {
+  try {
+    const { data } = await axios.post('https://qjh6rvwfng.execute-api.us-east-1.amazonaws.com/BusCuenta',
+    { Id_Cuenta: itemId });
+    return JSON.parse(data);
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const getAccounts = async () => {
   try {
     const { data } = await axios.get('https://30ch4k4p17.execute-api.us-east-1.amazonaws.com/LisCuenta');
@@ -78,6 +88,7 @@ export const getMusicalWorks = async () => {
 };
 
 const queries = {
+  getAccount,
   getAccounts,
   getCollections,
   getGenres,
