@@ -108,6 +108,15 @@ export const updateInterpreter = async (item) => {
   }
 };
 
+export const uploadMusicalWorkFile = async (item) => {
+  try {
+    const { data } = await axios.put(`https://p1spavcbr4.execute-api.us-east-1.amazonaws.com/upload/letrasmusicales/${item.name}`,item);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 const mutations = {
   addAccount,
   addCollection,
@@ -121,6 +130,7 @@ const mutations = {
   deletePhonogram,
   updateAccount,
   updateInterpreter,
+  uploadMusicalWorkFile,
 };
 
 export default mutations;
