@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import './App.css';
 import theme from './styles/theme';
 
+import Accounts from './containers/Accounts';
 import Collections from './containers/Collections';
 import Home from './containers/Home';
 import Interpreters from './containers/Interpreters';
@@ -25,6 +26,7 @@ function App() {
               <BrowserRouter>
                 <Routes>
                   <Route path='/' element={<Home />} />
+                  <Route path='cuentas/' element={<Accounts />} />
                   <Route path='fonogramas/' element={<Phonograms />} />
                   <Route path='interpretes/' element={<Interpreters />} />
                   <Route path='obras-musicales/' element={<MusicalWorks />} />
