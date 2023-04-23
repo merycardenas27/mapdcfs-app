@@ -90,6 +90,15 @@ export const deletePhonogram = async (itemId) => {
   }
 };
 
+export const updateAccount = async (item) => {
+  try {
+    const { data } = await axios.put('https://ujaa0let88.execute-api.us-east-1.amazonaws.com/ModCuenta',item);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const updateInterpreter = async (item) => {
   try {
     const { data } = await axios.put('https://74f3u7fi44.execute-api.us-east-1.amazonaws.com/ModInterprete',item);
@@ -110,6 +119,7 @@ const mutations = {
   deleteInterpreter,
   deleteMusicalWork,
   deletePhonogram,
+  updateAccount,
   updateInterpreter,
 };
 
