@@ -10,6 +10,7 @@ import Accounts from './containers/Accounts';
 import Collections from './containers/Collections';
 import Home from './containers/Home';
 import Interpreters from './containers/Interpreters';
+import Login from './containers/Login';
 import MusicalWorks from './containers/MusicalWorks';
 import Phonograms from './containers/Phonograms';
 
@@ -28,6 +29,7 @@ function App() {
                   <Route path='/' element={<Home />} />
                   <Route path='cuentas/' element={<Accounts />} />
                   <Route path='fonogramas/' element={<Phonograms />} />
+                  <Route path='iniciar-sesion/' element={<Login />} />
                   <Route path='interpretes/' element={<Interpreters />} />
                   <Route path='obras-musicales/' element={<MusicalWorks />} />
                   <Route path='recaudaciones/' element={<Collections />} />
