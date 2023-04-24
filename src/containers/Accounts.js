@@ -1,22 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 import { getAccounts } from '../queries';
 
 import AlertError from '../components/CustomAlertError';
 import AlertInfo from '../components/CustomAlertInfo';
+import DialogToAdd from '../components/DialogToAddAccount';
 import Loader from '../components/CustomLoader';
 import Table from '../components/CustomTable';
 
 const Accounts = () => {
+  const [openAddDialog, setOpenAddDialog] = useState(false);
+
   const {
     data: items,
     error,
     isError,
     isLoading,
+    refetch,
   } =useQuery('accounts', getAccounts);
+
+  const handleOpenAddDialog = () => {
+    setOpenAddDialog(true);
+  };
+
+  const handleCloseAddDialog = () => {
+    setOpenAddDialog(false);
+  };
 
   return (
     <div className="view">
@@ -28,6 +44,13 @@ const Accounts = () => {
         : isError
           ? <AlertError message={error.message} />
           : <>
+              <section className="actions">
+                <Tooltip title="Agregar">
+                  <IconButton aria-label="agregar" color="primary" onClick={handleOpenAddDialog}>
+                    <PersonAddIcon />
+                  </IconButton>
+                </Tooltip>
+              </section>
               <section className="body">
                 {!items.length
                   ? <AlertInfo message="No hay cuentas registradas" />
@@ -36,6 +59,13 @@ const Accounts = () => {
                       rows={items}
                     />
                 }
+              </section>
+              <section className="dialogs">
+                <DialogToAdd
+                  handleClose={handleCloseAddDialog}
+                  handleRefetch={refetch}
+                  open={openAddDialog}
+                />
               </section>
             </>
       }
