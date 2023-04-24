@@ -14,11 +14,13 @@ import AlertError from '../components/CustomAlertError';
 import AlertInfo from '../components/CustomAlertInfo';
 import DialogToAdd from '../components/DialogToAddAccount';
 import DialogToDelete from '../components/DialogToDelete';
+import DialogToUpdate from '../components/DialogToUpdateAccount';
 import Loader from '../components/CustomLoader';
 import Table from '../components/CustomTable';
 
 const Accounts = () => {
   const [itemToDelete, setItemToDelete] = useState(null);
+  const [itemToUpdate, setItemToUpdate] = useState(null);
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
@@ -46,6 +48,14 @@ const Accounts = () => {
   const handleCloseDeleteDialog = (itemId) => {
     setItemToDelete(null);
     setOpenDeleteDialog(false);
+  };
+
+  const handleOpenUpdateDialog = (item) => {
+    setItemToUpdate(item);
+  };
+
+  const handleCloseUpdateDialog = (item) => {
+    setItemToUpdate(null);
   };
 
   const { mutate: mutateByDeleting } = useMutation(deleteAccount, {
@@ -78,6 +88,7 @@ const Accounts = () => {
                   : <Table
                       columns={['ID', 'NOMBRE', 'APELLIDO', 'CORREO', 'CONTRASEÑA', 'PRODUCTORA', 'ACCIONES']}
                       handleDelete={handleOpenDeleteDialog}
+                      handleEdit={handleOpenUpdateDialog}
                       rows={items}
                     />
                 }
@@ -95,6 +106,13 @@ const Accounts = () => {
                   open={openDeleteDialog}
                   title={`¿Estás seguro de eliminar el fonograma con ID=${itemToDelete}?`}
                 />
+                {itemToUpdate?.length &&
+                  <DialogToUpdate
+                    handleClose={handleCloseUpdateDialog}
+                    handleRefetch={refetch}
+                    item={itemToUpdate}
+                  />
+                }
               </section>
             </>
       }
