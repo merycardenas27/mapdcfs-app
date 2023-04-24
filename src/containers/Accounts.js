@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -7,16 +7,20 @@ import Typography from '@mui/material/Typography';
 
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
+import { deleteAccount } from '../mutations';
 import { getAccounts } from '../queries';
 
 import AlertError from '../components/CustomAlertError';
 import AlertInfo from '../components/CustomAlertInfo';
 import DialogToAdd from '../components/DialogToAddAccount';
+import DialogToDelete from '../components/DialogToDelete';
 import Loader from '../components/CustomLoader';
 import Table from '../components/CustomTable';
 
 const Accounts = () => {
+  const [itemToDelete, setItemToDelete] = useState(null);
   const [openAddDialog, setOpenAddDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const {
     data: items,
@@ -33,6 +37,23 @@ const Accounts = () => {
   const handleCloseAddDialog = () => {
     setOpenAddDialog(false);
   };
+
+  const handleOpenDeleteDialog = (itemId) => {
+    setItemToDelete(itemId);
+    setOpenDeleteDialog(true);
+  };
+
+  const handleCloseDeleteDialog = (itemId) => {
+    setItemToDelete(null);
+    setOpenDeleteDialog(false);
+  };
+
+  const { mutate: mutateByDeleting } = useMutation(deleteAccount, {
+    onSuccess: () => {
+      refetch('accounts');
+      handleCloseDeleteDialog();
+    },
+  });
 
   return (
     <div className="view">
@@ -56,6 +77,7 @@ const Accounts = () => {
                   ? <AlertInfo message="No hay cuentas registradas" />
                   : <Table
                       columns={['ID', 'NOMBRE', 'APELLIDO', 'CORREO', 'CONTRASEÑA', 'PRODUCTORA', 'ACCIONES']}
+                      handleDelete={handleOpenDeleteDialog}
                       rows={items}
                     />
                 }
@@ -65,6 +87,13 @@ const Accounts = () => {
                   handleClose={handleCloseAddDialog}
                   handleRefetch={refetch}
                   open={openAddDialog}
+                />
+                <DialogToDelete
+                  handleClose={handleCloseDeleteDialog}
+                  handleDelete={mutateByDeleting}
+                  itemId={itemToDelete}
+                  open={openDeleteDialog}
+                  title={`¿Estás seguro de eliminar el fonograma con ID=${itemToDelete}?`}
                 />
               </section>
             </>
