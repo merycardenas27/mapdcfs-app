@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useMutation, useQuery } from 'react-query';
+import { useNavigate } from "react-router-dom";
 
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -7,6 +8,7 @@ import Typography from '@mui/material/Typography';
 
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
+import { Context } from '../store';
 import { deleteCollection } from '../mutations';
 import { getCollections } from '../queries';
 
@@ -18,6 +20,15 @@ import Loader from '../components/CustomLoader';
 import Table from '../components/CustomTable';
 
 const Collections = () => {
+  const [state] = useContext(Context);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!state.isLogged) {
+      return navigate('/iniciar-sesion', {replace: true});
+    }
+  }, [state, navigate]);
+
   const [itemToDelete, setItemToDelete] = useState(null);
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
