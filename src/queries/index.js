@@ -87,6 +87,15 @@ export const getMusicalWorks = async () => {
   }
 };
 
+export const getRanking = async () => {
+  try {
+    const { data } = await axios.get('https://xxl374likg.execute-api.us-east-1.amazonaws.com/RankingMusical');
+    return JSON.parse(data);
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 const queries = {
   getAccount,
   getAccounts,
@@ -97,6 +106,7 @@ const queries = {
   getMusicalWorks,
   getPhonograms,
   getPlatforms,
+  getRanking,
 };
 
 export default queries;
