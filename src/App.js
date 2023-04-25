@@ -16,6 +16,7 @@ import Login from './containers/Login';
 import MenuAppBar from './components/CustomMenuAppBar';
 import MusicalWorks from './containers/MusicalWorks';
 import Phonograms from './containers/Phonograms';
+import Ranking from './containers/Ranking';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ function App() {
                   <Route path='iniciar-sesion/' element={<Login />} />
                   <Route path='interpretes/' element={<Interpreters />} />
                   <Route path='obras-musicales/' element={<MusicalWorks />} />
+                  <Route path='ranking/' element={<Ranking />} />
                   <Route path='recaudaciones/' element={<Collections />} />
                 </Routes>
               </BrowserRouter>
