@@ -117,6 +117,15 @@ export const uploadMusicalWorkFile = async (item) => {
   }
 };
 
+export const verifyAccount = async (item) => {
+  try {
+    const { data } = await axios.post('https://0pxqdp7zjk.execute-api.us-east-1.amazonaws.com/IniSesion', item);
+    return JSON.parse(data);
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 const mutations = {
   addAccount,
   addCollection,
@@ -131,6 +140,7 @@ const mutations = {
   updateAccount,
   updateInterpreter,
   uploadMusicalWorkFile,
+  verifyAccount,
 };
 
 export default mutations;
