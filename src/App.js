@@ -1,8 +1,10 @@
+import React, { useContext } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 
+import { Context, initialState } from './store';
 import './App.css';
 import theme from './styles/theme';
 
@@ -11,6 +13,7 @@ import Collections from './containers/Collections';
 import Home from './containers/Home';
 import Interpreters from './containers/Interpreters';
 import Login from './containers/Login';
+import MenuAppBar from './components/CustomMenuAppBar';
 import MusicalWorks from './containers/MusicalWorks';
 import Phonograms from './containers/Phonograms';
 
@@ -18,12 +21,15 @@ import Phonograms from './containers/Phonograms';
 const queryClient = new QueryClient();
 
 function App() {
+  const [state, setState] = useContext(Context);
+
   return (
     // Provide the client to App
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <div className="app">
             <div className="wrapper">
+              {state.isLogged && <MenuAppBar account={state} handleLogout={() => setState(initialState)}/>}
               <BrowserRouter>
                 <Routes>
                   <Route path='/' element={<Home />} />
