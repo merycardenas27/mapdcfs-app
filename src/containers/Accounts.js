@@ -117,13 +117,12 @@ const Accounts = () => {
                   open={openDeleteDialog}
                   title={`¿Estás seguro de eliminar la cuenta con ID=${itemToDelete}?`}
                 />
-                {
-                  itemToUpdate?.length &&
-                    <DialogToUpdate
-                      handleClose={handleCloseUpdateDialog}
-                      handleRefetch={refetch}
-                      item={itemToUpdate}
-                    />
+                {itemToUpdate?.length &&
+                  <DialogToUpdate
+                    handleClose={handleCloseUpdateDialog}
+                    handleRefetch={refetch}
+                    item={itemToUpdate}
+                  />
                 }
               </section>
             </>
