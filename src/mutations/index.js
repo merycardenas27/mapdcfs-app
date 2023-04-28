@@ -126,6 +126,15 @@ export const uploadMusicalWorkFile = async (item) => {
   }
 };
 
+export const updatePhonogram = async (item) => {
+  try {
+    const { data } = await axios.put('https://m8wp8kaf8j.execute-api.us-east-1.amazonaws.com/ModFonograma',item);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const verifyAccount = async (item) => {
   try {
     const { data } = await axios.post('https://0pxqdp7zjk.execute-api.us-east-1.amazonaws.com/IniSesion', item);
@@ -150,6 +159,7 @@ const mutations = {
   updateCollection,
   updateInterpreter,
   uploadMusicalWorkFile,
+  updatePhonogram,
   verifyAccount,
 };
 
