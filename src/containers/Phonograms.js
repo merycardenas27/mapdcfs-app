@@ -16,6 +16,7 @@ import AlertError from '../components/CustomAlertError';
 import AlertInfo from '../components/CustomAlertInfo';
 import DialogToAdd from '../components/DialogToAddPhonogram';
 import DialogToDelete from '../components/DialogToDelete';
+import DialogToUpdate from '../components/DialogToUpdatePhonogram';
 import Loader from '../components/CustomLoader';
 import Table from '../components/PhonogramTable';
 
@@ -30,6 +31,7 @@ const Phonograms = () => {
   }, [state, navigate]);
 
   const [itemToDelete, setItemToDelete] = useState(null);
+  const [itemToUpdate, setItemToUpdate] = useState(null);
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
@@ -57,6 +59,14 @@ const Phonograms = () => {
   const handleCloseDeleteDialog = (itemId) => {
     setItemToDelete(null);
     setOpenDeleteDialog(false);
+  };
+
+  const handleOpenUpdateDialog = (item) => {
+    setItemToUpdate(item);
+  };
+
+  const handleCloseUpdateDialog = (item) => {
+    setItemToUpdate(null);
   };
 
   const { mutate: mutateByDeleting } = useMutation(deletePhonogram, {
@@ -89,6 +99,7 @@ const Phonograms = () => {
                   : <Table
                       columns={['ID', 'TITULO', 'DURACIÓN (seg)', 'F. DE CREACIÓN', 'GÉNERO', 'ACCIONES']}
                       handleDelete={handleOpenDeleteDialog}
+                      handleEdit={handleOpenUpdateDialog}
                       rows={phonograms}
                     />
                 }
@@ -106,6 +117,13 @@ const Phonograms = () => {
                   open={openDeleteDialog}
                   title={`¿Estás seguro de eliminar el fonograma con ID=${itemToDelete}?`}
                 />
+                {itemToUpdate?.length &&
+                  <DialogToUpdate
+                    handleClose={handleCloseUpdateDialog}
+                    handleRefetch={refetch}
+                    item={itemToUpdate}
+                  />
+                }
               </section>
             </>
       }
