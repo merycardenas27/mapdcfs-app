@@ -20,6 +20,16 @@ export const getAccounts = async () => {
   }
 };
 
+export const getCollection = async (itemId) => {
+  try {
+    const { data } = await axios.post('https://0tfeo5epjk.execute-api.us-east-1.amazonaws.com/BusRecaudacion',
+    { Id_Recaudacion: itemId });
+    return JSON.parse(data);
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const getCollections = async () => {
   try {
     const { data } = await axios.get('https://f88dl3e779.execute-api.us-east-1.amazonaws.com/LisRecaudacion');
@@ -99,6 +109,7 @@ export const getRanking = async () => {
 const queries = {
   getAccount,
   getAccounts,
+  getCollection,
   getCollections,
   getGenres,
   getInterpreterProfiles,
