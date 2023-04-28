@@ -77,7 +77,7 @@ const PotentialSuccesses = () => {
                 startIcon={<UploadFileIcon />}
                 variant="contained"
               >
-                Subir archivo
+                Nuevos Lanzamientos
               </Button>
             </label>
             <FormHelperText component="span" error={!!errors.file}   sx={{marginLeft: '8px'}}>
@@ -85,7 +85,7 @@ const PotentialSuccesses = () => {
                 ? errors.file.message
                 : selectedFile && selectedFile[0]
                   ? selectedFile[0].name
-                  : '*Seleccionar archivo .xlsx, .xls'}
+                  : 'Subir archivo .xlsx, .xls'}
             </FormHelperText>
           </Grid>
           <Grid item md={6} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
