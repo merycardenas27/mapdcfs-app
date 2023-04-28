@@ -125,7 +125,7 @@ export default function DialogToAddMusicalWork({
                   })}
                 />
                 <Button color="secondary" variant="contained" component="span" startIcon={<UploadFileIcon />}>
-                  Subir archivo
+                  Letra musical
                 </Button>
               </label>
               <FormHelperText component="span" error={!!errors.file}   sx={{marginLeft: '8px'}}>
@@ -133,7 +133,7 @@ export default function DialogToAddMusicalWork({
                   ? errors.file.message
                   : selectedFile && selectedFile[0]
                     ? selectedFile[0].name
-                    : '*Seleccionar archivo .txt'}
+                    : 'Subir archivo .txt'}
               </FormHelperText>
             </Grid>
           </Grid>
