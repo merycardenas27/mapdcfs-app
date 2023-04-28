@@ -99,6 +99,15 @@ export const updateAccount = async (item) => {
   }
 };
 
+export const updateCollection = async (item) => {
+  try {
+    const { data } = await axios.put('https://pwlf9gbwvb.execute-api.us-east-1.amazonaws.com/ModRecaudacion',item);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const updateInterpreter = async (item) => {
   try {
     const { data } = await axios.put('https://74f3u7fi44.execute-api.us-east-1.amazonaws.com/ModInterprete',item);
@@ -138,6 +147,7 @@ const mutations = {
   deleteMusicalWork,
   deletePhonogram,
   updateAccount,
+  updateCollection,
   updateInterpreter,
   uploadMusicalWorkFile,
   verifyAccount,
