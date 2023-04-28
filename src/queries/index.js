@@ -48,6 +48,17 @@ export const getGenres = async () => {
   }
 };
 
+export const getInterpreterPhonogram = async (itemId) => {
+  try {
+    const { data } = await axios.post('https://cae7cg9051.execute-api.us-east-1.amazonaws.com/BusInterpreteFonograma',{
+      Id_Fonograma: itemId,
+    });
+    return JSON.parse(data);
+  } catch (error) {
+    return Promise.reject(error.response?.data || error);
+  }
+};
+
 export const getInterpreters = async () => {
   try {
     const { data } = await axios.get('https://h1h6ip1eb9.execute-api.us-east-1.amazonaws.com/LisInterprete');
@@ -112,6 +123,7 @@ const queries = {
   getCollection,
   getCollections,
   getGenres,
+  getInterpreterPhonogram,
   getInterpreterProfiles,
   getInterpreters,
   getMusicalWorks,
