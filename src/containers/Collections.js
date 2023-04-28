@@ -16,6 +16,7 @@ import AlertError from '../components/CustomAlertError';
 import AlertInfo from '../components/CustomAlertInfo';
 import DialogToAdd from '../components/DialogToAddCollection';
 import DialogToDelete from '../components/DialogToDelete';
+import DialogToUpdate from '../components/DialogToUpdateCollection';
 import Loader from '../components/CustomLoader';
 import Table from '../components/CustomTable';
 
@@ -30,6 +31,7 @@ const Collections = () => {
   }, [state, navigate]);
 
   const [itemToDelete, setItemToDelete] = useState(null);
+  const [itemToUpdate, setItemToUpdate] = useState(null);
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
@@ -57,6 +59,14 @@ const Collections = () => {
   const handleCloseDeleteDialog = (itemId) => {
     setItemToDelete(null);
     setOpenDeleteDialog(false);
+  };
+
+  const handleOpenUpdateDialog = (item) => {
+    setItemToUpdate(item);
+  };
+
+  const handleCloseUpdateDialog = (item) => {
+    setItemToUpdate(null);
   };
 
   const { mutate: mutateByDeleting } = useMutation(deleteCollection, {
@@ -89,6 +99,7 @@ const Collections = () => {
                   : <Table
                       columns={['ID', 'N° DE DESCARGAS', 'N° DE STREAMS', 'MONTO', 'PLATAFORMA STREAMING', 'FONOGRAMA', 'ACCIONES']}
                       handleDelete={handleOpenDeleteDialog}
+                      handleEdit={handleOpenUpdateDialog}
                       rows={collections}
                     />
                 }
@@ -106,6 +117,13 @@ const Collections = () => {
                   open={openDeleteDialog}
                   title={`¿Estás seguro de eliminar la recaudación con ID=${itemToDelete}?`}
                 />
+                {itemToUpdate?.length &&
+                  <DialogToUpdate
+                    handleClose={handleCloseUpdateDialog}
+                    handleRefetch={refetch}
+                    item={itemToUpdate}
+                  />
+                }
               </section>
             </>
       }
