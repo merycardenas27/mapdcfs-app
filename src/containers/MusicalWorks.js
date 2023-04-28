@@ -15,7 +15,7 @@ import { getMusicalWorks } from '../queries';
 import AlertError from '../components/CustomAlertError';
 import AlertInfo from '../components/CustomAlertInfo';
 import DialogToAdd from '../components/DialogToAddMusicalWork';
-import DialogToDelete from '../components/DialogToDelete';
+import DialogToDelete from '../components/DialogToDeleteMusicalWork';
 import Loader from '../components/CustomLoader';
 import Table from '../components/CustomTable';
 
