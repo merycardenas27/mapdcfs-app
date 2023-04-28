@@ -15,7 +15,7 @@ import ConverToObjectArray from '../utils/convertToObjectArray';
 
 import Table from '../components/PotentialProccessTable';
 
-const filePattern = /([a-zA-Z0-9\s_\\.\-:()])+(.csv|.CSV|.xls|.XLS|.xlsx|.XLSX)$/;
+const filePattern = /([a-zA-Z0-9\s_\\.\-:()])+(.xls|.XLS|.xlsx|.XLSX)$/;
 
 const PotentialSuccesses = () => {
   const [state] = useContext(Context);
@@ -66,7 +66,7 @@ const PotentialSuccesses = () => {
                   required: 'Es requerido',
                   validate: (value) => {
                     const { name } = value[0];
-                    return filePattern.test(name) || 'Debe ser un archivo: .xlsx, .xls, .csv';
+                    return filePattern.test(name) || 'Debe ser un archivo: .xlsx, .xls';
                   }
                 })}
               />
@@ -85,7 +85,7 @@ const PotentialSuccesses = () => {
                 ? errors.file.message
                 : selectedFile && selectedFile[0]
                   ? selectedFile[0].name
-                  : '*Seleccionar archivo .xlsx, .xls, .csv '}
+                  : '*Seleccionar archivo .xlsx, .xls'}
             </FormHelperText>
           </Grid>
           <Grid item md={6} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
