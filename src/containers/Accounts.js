@@ -97,10 +97,10 @@ const Accounts = () => {
                 {!items.length
                   ? <AlertInfo message="No hay cuentas registradas" />
                   : <Table
-                      columns={['ID', 'NOMBRE', 'APELLIDO', 'CORREO', 'CONTRASEÑA', 'PRODUCTORA', 'ACCIONES']}
+                      columns={['ID', 'NOMBRE', 'APELLIDO', 'CORREO', 'CONTRASEÑA', 'ACCIONES']}
                       handleDelete={handleOpenDeleteDialog}
                       handleEdit={handleOpenUpdateDialog}
-                      rows={items}
+                      rows={items.map((row) => row.filter((cell, index) => index !== 5 && cell))}
                     />
                 }
               </section>
